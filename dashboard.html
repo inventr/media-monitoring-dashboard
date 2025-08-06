@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoreo de Medios - ARL Positiva</title>
+    <title>Monitoreo de Medios - Jota Pe Hernández</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
@@ -91,19 +91,16 @@
 
         .alert-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
             color: white;
             padding: 8px 20px;
             border-radius: 25px;
             font-weight: bold;
             font-size: 0.9em;
-            animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .alert-badge.warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
         }
 
         .stats-grid {
@@ -220,6 +217,7 @@
             gap: 15px;
             font-size: 0.8em;
             color: #6c757d;
+            margin-bottom: 10px;
         }
 
         .timeline-link {
@@ -243,33 +241,50 @@
             color: white;
         }
 
-        .timeline-link.main-article {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+        .timeline-link.news-article {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
         }
 
-        .timeline-link.main-article:hover {
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        .timeline-link.news-article:hover {
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
 
-        .sentiment-negative {
-            border-left-color: #e74c3c;
+        .timeline-link.video-content {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
         }
 
-        .sentiment-negative:before {
-            background: #e74c3c;
+        .timeline-link.video-content:hover {
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
         }
 
-        .sentiment-neutral {
+        .classification-normal {
+            border-left-color: #27ae60;
+        }
+
+        .classification-normal:before {
+            background: #27ae60;
+        }
+
+        .classification-review {
             border-left-color: #f39c12;
         }
 
-        .sentiment-neutral:before {
+        .classification-review:before {
             background: #f39c12;
         }
 
+        .classification-critical {
+            border-left-color: #e74c3c;
+        }
+
+        .classification-critical:before {
+            background: #e74c3c;
+        }
+
         .key-insights {
-            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 30px;
@@ -305,6 +320,24 @@
             line-height: 1.6;
         }
 
+        .period-info {
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .period-info h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .period-info p {
+            color: #7f8c8d;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .charts-section {
                 grid-template-columns: 1fr;
@@ -316,12 +349,25 @@
             
             .container {
                 padding: 20px;
+                padding-top: 80px;
             }
 
-            .logout-btn, .user-info {
+            .logout-btn {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                padding: 10px 16px;
+                font-size: 0.9em;
+                z-index: 1001;
+            }
+
+            .user-info {
                 position: static;
                 margin-bottom: 20px;
                 text-align: center;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 10px;
+                border-radius: 10px;
             }
         }
     </style>
@@ -338,7 +384,7 @@
 
     <div class="container">
         <!-- Botón de logout y info de usuario -->
-        <button class="logout-btn" onclick="logout()">🚪 Cerrar Sesión</button>
+        <button class="logout-btn" onclick="logout()">🚪 CERRAR SESIÓN</button>
         <div class="user-info">
             <strong>Usuario:</strong> <span id="currentUser">CNE</span><br>
             <small>Sesión iniciada: <span id="loginTime">--</span></small>
@@ -346,39 +392,45 @@
 
         <div class="header">
             <h1>Monitoreo de Medios</h1>
-            <p class="subtitle">Caso: José Luis Correa - ARL Positiva</p>
-            <span class="alert-badge">⚠️ CRISIS ACTIVA</span>
+            <p class="subtitle">Caso: Jota Pe Hernández</p>
+            <span class="alert-badge">✅ ESTABLE</span>
             <br><br>
-            <small style="color: #7f8c8d;">Última actualización: 5 de agosto de 2025, 18:00 GMT</small>
+            <small style="color: #7f8c8d;">Última actualización: 5 de agosto de 2025, 19:00 GMT</small>
+        </div>
+
+        <div class="period-info">
+            <h3>📅 Período de Monitoreo</h3>
+            <p><strong>Desde:</strong> 3 de agosto de 2025 | <strong>Hasta:</strong> 5 de agosto de 2025 (48 horas)</p>
+            <p><strong>Términos clave:</strong> "Jota Pe Hernández" | <strong>Fuentes:</strong> Twitter/X, Instagram, Facebook, YouTube, portales de noticias</p>
         </div>
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">9</div>
+                <div class="stat-number">13+</div>
                 <div class="stat-label">Menciones Totales</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">89%</div>
-                <div class="stat-label">Sentimiento Negativo</div>
+                <div class="stat-number">80%</div>
+                <div class="stat-label">Clasificación Normal</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">2.1K</div>
-                <div class="stat-label">Alcance Total</div>
+                <div class="stat-number">20%</div>
+                <div class="stat-label">Para Revisar</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">5h</div>
-                <div class="stat-label">Tiempo Transcurrido</div>
+                <div class="stat-number">0%</div>
+                <div class="stat-label">Críticas</div>
             </div>
         </div>
 
         <div class="charts-section">
             <div class="chart-container">
-                <h3 class="chart-title">Distribución por Sentimiento</h3>
-                <canvas id="sentimentChart"></canvas>
+                <h3 class="chart-title">Distribución por Clasificación</h3>
+                <canvas id="classificationChart"></canvas>
             </div>
             <div class="chart-container">
-                <h3 class="chart-title">Fuentes de Información</h3>
-                <canvas id="sourcesChart"></canvas>
+                <h3 class="chart-title">Menciones por Plataforma</h3>
+                <canvas id="platformChart"></canvas>
             </div>
         </div>
 
@@ -386,142 +438,108 @@
             <h2>📊 Insights Clave</h2>
             <div class="insights-grid">
                 <div class="insight-card">
-                    <div class="insight-title">🔥 Foco Principal</div>
-                    <div class="insight-content">La investigación de W Radio sobre presunto clientelismo y "peaje del 10%" está generando la mayor atención mediática.</div>
+                    <div class="insight-title">✅ Situación Estable</div>
+                    <div class="insight-content">No se identificaron amenazas directas ni menciones a uso indebido de recursos públicos. Las actividades políticas son rutinarias para un senador en ejercicio.</div>
                 </div>
                 <div class="insight-card">
-                    <div class="insight-title">👥 Impacto en Redes</div>
-                    <div class="insight-content">La periodista Paula Bolívar (@paulabolivar) logró el mayor alcance con 1,778 visualizaciones y 78 likes.</div>
+                    <div class="insight-title">⚠️ Punto de Atención</div>
+                    <div class="insight-content">Una mención de acoso alegado requiere seguimiento, aunque es aislada y sin amplificación en redes sociales.</div>
                 </div>
                 <div class="insight-card">
-                    <div class="insight-title">⚡ Quejas Operativas</div>
-                    <div class="insight-content">Los usuarios reportan problemas técnicos en la plataforma de ARL Positiva desde hace más de un mes.</div>
+                    <div class="insight-title">📈 Volumen Bajo</div>
+                    <div class="insight-content">Bajo volumen de menciones sin campañas coordinadas de ataque. Ausencia de hashtags relevantes o cuentas influyentes amplificando críticas.</div>
                 </div>
                 <div class="insight-card">
-                    <div class="insight-title">🎯 Contexto Político</div>
-                    <div class="insight-content">Se vincula el caso con críticas al gobierno de Gustavo Petro y especulaciones sobre nombramiento como ministro de Defensa.</div>
+                    <div class="insight-title">🔍 Recomendaciones</div>
+                    <div class="insight-content">Monitorear términos "Jota Pe Hernández acoso" en próximas 72 horas. Verificar Infobae/Semana por evoluciones partidistas.</div>
                 </div>
             </div>
         </div>
 
         <div class="timeline">
-            <h2>📅 Línea de Tiempo</h2>
+            <h2>📅 Línea de Tiempo (Últimas 48 Horas)</h2>
             
-            <div class="timeline-item sentiment-neutral">
-                <div class="timeline-time">17:25 GMT</div>
-                <div class="timeline-source">@sintrapositiva (Sindicato Oficial)</div>
-                <div class="timeline-content">Actualización sobre proceso de Transformación Digital con presencia de José Luis Correa</div>
+            <div class="timeline-item classification-normal">
+                <div class="timeline-time">5 ago, 19:00 GMT</div>
+                <div class="timeline-source">Infobae Colombia 📰</div>
+                <div class="timeline-content"><strong>ARTÍCULO PRINCIPAL:</strong> Reacción de Jota Pe Hernández a las condiciones que Maurice Armitage puso al Partido Verde. Menciona que varios congresistas no apoyan a Armitage.</div>
+                <div class="timeline-metrics">
+                    <span>🌐 Alcance moderado estimado</span>
+                    <span>🟢 Normal</span>
+                    <span>🏛️ Actividad partidista</span>
+                </div>
+                <a href="https://www.infobae.com/tag/jota-pe-hernandez/" target="_blank" class="timeline-link news-article">📰 Leer en Infobae</a>
+            </div>
+
+            <div class="timeline-item classification-normal">
+                <div class="timeline-time">5 ago, 00:35 GMT</div>
+                <div class="timeline-source">@orancas (Usuario Uribista)</div>
+                <div class="timeline-content">Difusión neutral de video de TikTok de Jota Pe Hernández - contenido propio del senador, posiblemente político o personal</div>
                 <div class="timeline-metrics">
                     <span>👁️ 17 vistas</span>
-                    <span>💭 Neutro</span>
+                    <span>❤️ 1 like</span>
+                    <span>🟢 Normal</span>
                 </div>
-                <a href="https://x.com/sintrapositiva/status/1952782934093492563" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
+                <a href="https://x.com/orancas/status/1952528883624128747" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
             </div>
 
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">17:18 GMT</div>
-                <div class="timeline-source">@Luna22873220955</div>
-                <div class="timeline-content">Compartir del artículo de W Radio sobre presunto clientelismo</div>
+            <div class="timeline-item classification-review">
+                <div class="timeline-time">4 ago, 13:04 GMT</div>
+                <div class="timeline-source">@Alejo_G_R_ ⚠️</div>
+                <div class="timeline-content"><strong>REQUIERE SEGUIMIENTO:</strong> Acusación de acoso a mujeres en eventos junto con Miguel Polo Polo. Parte de discusión crítica al gobierno y oposición. Sin evidencia adjunta.</div>
                 <div class="timeline-metrics">
-                    <span>👁️ 10 vistas</span>
-                    <span>📉 Negativo</span>
+                    <span>👁️ 30 vistas</span>
+                    <span>🟡 Revisar</span>
+                    <span>⚠️ Acusación sin evidencia</span>
                 </div>
-                <a href="https://x.com/Luna22873220955/status/1952781171395297773" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
+                <a href="https://x.com/Alejo_G_R_/status/1952354966129045539" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
             </div>
 
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">17:12 GMT</div>
-                <div class="timeline-source">@Patricia26_ord</div>
-                <div class="timeline-content">Crítica directa al gobierno mencionando corrupción y etiquetando a @jolcorrea</div>
+            <div class="timeline-item classification-normal">
+                <div class="timeline-time">4 ago, 19:00 GMT (estimado)</div>
+                <div class="timeline-source">YouTube (Canal político)</div>
+                <div class="timeline-content">Video sobre reacción de Jota Pe Hernández contra burlas del atentado a Miguel Uribe Turbay. Defensa política contra caricatura que minimiza atentado.</div>
                 <div class="timeline-metrics">
-                    <span>👁️ 2 vistas</span>
-                    <span>📉 Negativo</span>
+                    <span>📺 Vistas estimadas bajas</span>
+                    <span>🟢 Normal</span>
+                    <span>🛡️ Defensa política</span>
                 </div>
-                <a href="https://x.com/Patricia26_ord/status/1952779869172961604" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
+                <a href="https://www.youtube.com/watch?v=DuQO5C_3RbI" target="_blank" class="timeline-link video-content">📺 Ver Video</a>
             </div>
 
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">16:59 GMT</div>
-                <div class="timeline-source">@LATALPAZ</div>
-                <div class="timeline-content">Queja sobre problemas en la plataforma de ARL Positiva desde hace más de un mes</div>
+            <div class="timeline-item classification-normal">
+                <div class="timeline-time">3 ago, 10:50 GMT</div>
+                <div class="timeline-source">@JohanUchiha</div>
+                <div class="timeline-content">Crítica histórica por cambio de postura política - de opositor a Uribe a más moderado durante las protestas. Opinión política rutinaria.</div>
                 <div class="timeline-metrics">
-                    <span>👁️ 40 vistas</span>
-                    <span>🔄 1 repost</span>
-                    <span>📉 Negativo</span>
+                    <span>👁️ 12 vistas</span>
+                    <span>🟢 Normal</span>
+                    <span>📜 Crítica histórica</span>
                 </div>
-                <a href="https://x.com/LATALPAZ/status/1952776522084864227" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
+                <a href="https://x.com/JohanUchiha/status/1951958743077331161" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
             </div>
 
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">16:00 GMT</div>
-                <div class="timeline-source">@cyniscim</div>
-                <div class="timeline-content">Crítica sobre seguridad y posible nombramiento como ministro de Defensa</div>
+            <div class="timeline-item classification-normal">
+                <div class="timeline-time">3-5 ago (Período completo)</div>
+                <div class="timeline-source">Instagram, Facebook, YouTube (Contenido Propio)</div>
+                <div class="timeline-content"><strong>ACTIVIDAD RUTINARIA:</strong> 10+ menciones de contenido autopromocional - reels sobre transporte, actividades como embajador en Bucaramanga, feria de flores. Todo clasificado como normal.</div>
                 <div class="timeline-metrics">
-                    <span>👁️ 45 vistas</span>
-                    <span>📉 Negativo</span>
+                    <span>📱 Múltiples plataformas</span>
+                    <span>🟢 Normal</span>
+                    <span>🏛️ Actividad legislativa</span>
                 </div>
-                <a href="https://x.com/cyniscim/status/1952761647639986515" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
-            </div>
-
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">15:57 GMT</div>
-                <div class="timeline-source">@ncyanos</div>
-                <div class="timeline-content">Mensajes negativos sobre "extorsiona con peaje del 10%" y vinculaciones extremas</div>
-                <div class="timeline-metrics">
-                    <span>👁️ 21 vistas</span>
-                    <span>📉 Negativo</span>
-                </div>
-                <a href="https://x.com/ncyanos/status/1952760828693774485" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
-            </div>
-
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">15:45 GMT</div>
-                <div class="timeline-source">@Marug1112</div>
-                <div class="timeline-content">Queja detallada sobre el servicio pésimo de ARL Positiva tras cambio de plataforma</div>
-                <div class="timeline-metrics">
-                    <span>👁️ 101 vistas</span>
-                    <span>❤️ 2 likes</span>
-                    <span>🔄 3 reposts</span>
-                    <span>📉 Negativo</span>
-                </div>
-                <a href="https://x.com/Marug1112/status/1952757936112980230" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
-            </div>
-
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">14:21 GMT</div>
-                <div class="timeline-source">@paulabolivar (Periodista W Radio) ⭐</div>
-                <div class="timeline-content">Difusión oficial del artículo de investigación sobre clientelismo</div>
-                <div class="timeline-metrics">
-                    <span>👁️ 1,778 vistas</span>
-                    <span>❤️ 78 likes</span>
-                    <span>🔄 48 reposts</span>
-                    <span>💬 4 respuestas</span>
-                    <span>📉 Negativo</span>
-                </div>
-                <a href="https://x.com/paulabolivar/status/1952736698149769702" target="_blank" class="timeline-link">📱 Ver en Twitter/X</a>
-            </div>
-
-            <div class="timeline-item sentiment-negative">
-                <div class="timeline-time">13:00 GMT</div>
-                <div class="timeline-source">W Radio (Artículo Original) 🚨</div>
-                <div class="timeline-content"><strong>INVESTIGACIÓN PRINCIPAL:</strong> Denuncia de "peaje del 10%" en efectivo, viáticos por >150 millones de pesos en viajes internacionales, vinculación con Mario Castaño</div>
-                <div class="timeline-metrics">
-                    <span>🌐 Alto alcance estimado</span>
-                    <span>📉 Negativo</span>
-                    <span>🔍 Investigación</span>
-                </div>
-                <a href="https://www.wradio.com.co/2025/08/05/denuncian-presunto-clientelismo-en-arl-positiva-en-cabeza-de-su-presidente-jose-luis-correa/" target="_blank" class="timeline-link main-article">📰 Leer Artículo Completo</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Función de logout
+        // Función de logout - CORREGIDA para evitar 404
         function logout() {
             if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('username');
                 localStorage.removeItem('loginTime');
+                // Redirección corregida
                 window.location.href = '/';
             }
         }
@@ -541,18 +559,18 @@
             }
         });
 
-        // Gráfico de Sentimientos
-        const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
-        new Chart(sentimentCtx, {
+        // Gráfico de Clasificaciones
+        const classificationCtx = document.getElementById('classificationChart').getContext('2d');
+        new Chart(classificationCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Negativo', 'Neutro', 'Positivo'],
+                labels: ['🟢 Normal', '🟡 Revisar', '🔴 Crítico'],
                 datasets: [{
-                    data: [8, 1, 0],
+                    data: [80, 20, 0],
                     backgroundColor: [
-                        '#e74c3c',
+                        '#27ae60',
                         '#f39c12',
-                        '#27ae60'
+                        '#e74c3c'
                     ],
                     borderWidth: 3,
                     borderColor: '#fff'
@@ -574,19 +592,20 @@
             }
         });
 
-        // Gráfico de Fuentes
-        const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
-        new Chart(sourcesCtx, {
+        // Gráfico de Plataformas
+        const platformCtx = document.getElementById('platformChart').getContext('2d');
+        new Chart(platformCtx, {
             type: 'bar',
             data: {
-                labels: ['W Radio', 'Twitter/X', 'Sindicato'],
+                labels: ['Twitter/X', 'Noticias', 'YouTube', 'Instagram/Facebook'],
                 datasets: [{
                     label: 'Menciones',
-                    data: [1, 7, 1],
+                    data: [3, 1, 1, 8],
                     backgroundColor: [
-                        '#667eea',
-                        '#764ba2',
-                        '#f093fb'
+                        '#1DA1F2',
+                        '#3498db',
+                        '#FF0000',
+                        '#E4405F'
                     ],
                     borderRadius: 8,
                     borderSkipped: false,
